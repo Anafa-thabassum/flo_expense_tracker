@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flo — Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070A10;--surface:#0D1219;--border:#1A2332;--accent:#5EFFA8;--accent2:#5A9EFF;--text:#EEF2FF;--muted:#5B6F8A;--error:#FF4F6D}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;overflow:hidden}
+.left{flex:1;display:flex;flex-direction:column;justify-content:center;padding:70px;position:relative;overflow:hidden}
+.glow1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(94,255,168,.07) 0%,transparent 65%);top:-200px;left:-200px;border-radius:50%;animation:glow 7s ease-in-out infinite}
+.glow2{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(90,158,255,.05) 0%,transparent 65%);bottom:-100px;right:0;border-radius:50%;animation:glow 9s ease-in-out infinite reverse}
+@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:80px;z-index:1}
+.logo{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:grid;place-items:center;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#070A10}
+.brand-name{font-family:'Syne',sans-serif;font-weight:700;font-size:22px}
+.hero{z-index:1;max-width:460px}
+.hero h1{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;line-height:1.05;margin-bottom:22px;background:linear-gradient(140deg,var(--text) 30%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:17px;line-height:1.65}
+.stats{display:flex;gap:40px;margin-top:52px;z-index:1}
+.stat .v{font-family:'Syne',sans-serif;font-size:30px;font-weight:700;color:var(--accent)}
+.stat .l{font-size:12px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.card{position:absolute;z-index:2;background:rgba(13,18,25,.92);border:1px solid var(--border);border-radius:18px;padding:18px 22px;backdrop-filter:blur(14px)}
+.card.c1{bottom:160px;right:50px;animation:fadeUp .8s .4s both}
+.card.c2{top:160px;right:90px;animation:fadeUp .8s .6s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.card .cl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.card .cv{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--accent)}
+.card .cs{font-size:12px;color:var(--muted);margin-top:4px}
+.right{width:490px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;padding:64px 52px}
+.fhead{margin-bottom:42px}
+.fhead h2{font-family:'Syne',sans-serif;font-size:32px;font-weight:700;margin-bottom:8px}
+.fhead p{color:var(--muted);font-size:15px}
+.fg{margin-bottom:20px}
+label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em}
+input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:15px 17px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(94,255,168,.1)}
+input::placeholder{color:#2E3D52}
+.btn{width:100%;background:linear-gradient(135deg,var(--accent),#00DD88);border:none;border-radius:12px;padding:16px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#070A10;cursor:pointer;margin-top:10px;transition:opacity .2s,transform .1s;letter-spacing:.04em}
+.btn:hover{opacity:.9}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.div{text-align:center;color:var(--muted);font-size:13px;margin:26px 0;position:relative}
+.div::before,.div::after{content:'';position:absolute;top:50%;width:44%;height:1px;background:var(--border)}
+.div::before{left:0}.div::after{right:0}
+.ln{text-align:center;font-size:14px;color:var(--muted)}
+.ln a{color:var(--accent);text-decoration:none;font-weight:500}
+.ln a:hover{text-decoration:underline}
+.err{background:rgba(255,79,109,.1);border:1px solid rgba(255,79,109,.25);color:var(--error);border-radius:10px;padding:13px 16px;font-size:13px;margin-bottom:18px;display:none}
+</style>
+</head>
+<body>
+<div class="left">
+  <div class="glow1"></div><div class="glow2"></div>
+  <div class="brand"><div class="logo">F</div><span class="brand-name">Flo</span></div>
+  <div class="hero">
+    <h1>Control your money flow</h1>
+    <p>Track every expense, visualize your spending patterns, and reach your financial goals — all in one elegant dashboard.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">7</div><div class="l">Categories</div></div>
+    <div class="stat"><div class="v">Real-time</div><div class="l">Analytics</div></div>
+    <div class="stat"><div class="v">Free</div><div class="l">Forever</div></div>
+  </div>
+  <div class="card c1">
+    <div class="cl">Monthly Savings</div>
+    <div class="cv">$840.00</div>
+    <div class="cs">↑ 18% vs last month</div>
+  </div>
+  <div class="card c2">
+    <div class="cl">Top Spend</div>
+    <div class="cv">Food &amp; Dining</div>
+    <div class="cs">38% of total</div>
+  </div>
+</div>
+<div class="right">
+  <div class="fhead">
+    <h2>Welcome back</h2>
+    <p>Sign in to your Flo account</p>
+  </div>
+  <div class="err" id="err"></div>
+  <div class="fg"><label>Email</label><input type="email" id="email" placeholder="you@example.com"></div>
+  <div class="fg"><label>Password</label><input type="password" id="pw" placeholder="••••••••"></div>
+  <button class="btn" id="btn" onclick="login()">Sign In</button>
+  <div class="div">or</div>
+  <div class="ln">No account? <a href="/signup">Create one free</a></div>
+</div>
+<script>
+async function login(){
+  const email=document.getElementById('email').value.trim();
+  const pw=document.getElementById('pw').value;
+  const btn=document.getElementById('btn');
+  const err=document.getElementById('err');
+  err.style.display='none';
+  if(!email||!pw){showErr('Please fill in all fields');return;}
+  btn.disabled=true;btn.textContent='Signing in...';
+  try{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});
+    const d=await r.json();
+    if(d.success){window.location.href='/dashboard';}
+    else{showErr(d.error||'Login failed');btn.disabled=false;btn.textContent='Sign In';}
+  }catch(e){showErr('Connection error');btn.disabled=false;btn.textContent='Sign In';}
+}
+function showErr(m){const e=document.getElementById('err');e.textContent=m;e.style.display='block';}
+document.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
+</script>
+</body>
+</html>
